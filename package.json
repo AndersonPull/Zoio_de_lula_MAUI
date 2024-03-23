@@ -13,12 +13,51 @@
     "Formatters"
   ],
   "activationEvents": [],
-  "main": "./out/extension.js",
+  "main": "*",
   "contributes": {
     "commands": [
       {
         "command": "zoioDeLula.helloWorld",
         "title": "Hello World"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Zoio de lula",
+        "properties": {
+          "zoiodelula.settings.attributesInNewlineThreshold": {
+            "markdownDescription": "Attributes count threshold to position attributes in newlines. Default is *1*. This setting only works when **Position first attribute on same line** is enabled.\n\nFor example if threshold=2, all attributes will be on same line if an element has only 2 attributes,\n\notherwise each attribute will be placed on newline.\n\nMore Info: [GitHub](https://github.com/AndersonPull/Zoio_de_lula_MAUI)",
+            "type": "number",
+            "default": 1,
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          "zoiodelula.settings.formatOnSave": {
+            "markdownDescription": "Enable format on save.  *Default* is *Unchecked*",
+            "type": "boolean",
+            "default": false
+          },
+          "zoiodelula.settings.positionAllAttributesOnFirstLine": {
+            "markdownDescription": "Position all attributes on same line as element. Setting this to *Checked* will ignore *Position First Attribute On Same Line*=*Unchecked*. *Default* is *Unchecked.* \n\n **Checked** : \n\n `<Element Attribute1=\"Value1\" Attribute2=\"Value2\"` \n\n **Unchecked** :\n\n`<Element Attribute1=\"Value1\"`\n\n&emsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`Attribute2=\"Value2\"` ",
+            "type": "boolean",
+            "default": false
+          },
+          "zoiodelula.settings.useSelfClosingTag": {
+            "markdownDescription": "If no child nodes then use self closing tag `/>`. *Default* is *Checked* \n\n **Checked** : `<label></label>` → `<label/>` \n\n  **Unchecked** : `<label></label>` → `<label></label>` ",
+            "type": "boolean",
+            "default": true
+          }
+        }
       }
     ]
   },
