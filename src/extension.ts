@@ -2,13 +2,16 @@ import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	console.log('Congratulations, your extension "zoioDeLula" is now active!');
+	// 👍 formatter implemented using API
+	vscode.languages.registerDocumentFormattingEditProvider('XAML', {
+		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+			const firstLine = document.lineAt(0);
+			let retorno: vscode.TextEdit[] = [];
 
-	let disposable = vscode.commands.registerCommand('zoioDeLula.helloWorld', () => {
-		vscode.window.showInformationMessage('Hello World from zoioDeLula!');
+			if (firstLine.text !== 'Formatado') {
+				retorno = [vscode.TextEdit.insert(firstLine.range.start, ' Formatado\n')];
+			}
+			return retorno;
+		}
 	});
-
-	context.subscriptions.push(disposable);
 }
-
-export function deactivate() { }

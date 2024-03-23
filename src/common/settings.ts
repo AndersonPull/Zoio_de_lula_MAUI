@@ -18,9 +18,9 @@ export class Settings {
     positionAllAttributesOnFirstLine?: boolean;
     useSelfClosingTags?: boolean;
 
-    constructor(attributesInNewlineThreshold: number, 
-        formatOnSave?: boolean, 
-        positionAllAttributesOnFirstLine?: boolean, 
+    constructor(attributesInNewlineThreshold: number,
+        formatOnSave?: boolean,
+        positionAllAttributesOnFirstLine?: boolean,
         useSelfClosingTags?: boolean) {
         this.attributesInNewlineThreshold = attributesInNewlineThreshold ?? defaultSettings.attributesInNewlineThreshold;
         this.formatOnSave = formatOnSave ?? defaultSettings.formatOnSave;
