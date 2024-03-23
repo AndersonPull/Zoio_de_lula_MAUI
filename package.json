@@ -1,6 +1,6 @@
 {
-  "name": "mauiformatting",
-  "displayName": "MAUI Formatting",
+  "name": "zoioDeLula",
+  "displayName": "Zoio de Lula",
   "description": "",
   "version": "0.0.1",
   "author": "Anderson Oliveira",
@@ -10,14 +10,14 @@
     "vscode": "^1.87.0"
   },
   "categories": [
-    "Other"
+    "Formatters"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "mauiformatting.helloWorld",
+        "command": "zoioDeLula.helloWorld",
         "title": "Hello World"
       }
     ]
