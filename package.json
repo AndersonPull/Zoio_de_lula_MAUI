@@ -74,6 +74,11 @@
             "type": "boolean",
             "default": false
           },
+          "zoiodelula.settings.removeUnusedAttributes": {
+            "markdownDescription": "Remove unused attributes",
+            "type": "boolean",
+            "default": false
+          },
           "zoiodelula.settings.useSelfClosingTag": {
             "markdownDescription": "If no child nodes then use self closing tag `/>`. *Default* is *Checked* \n\n **Checked** : `<label></label>` → `<label/>` \n\n  **Unchecked** : `<label></label>` → `<label></label>` ",
             "type": "boolean",
