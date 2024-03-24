@@ -1,16 +1,13 @@
 import * as vscode from 'vscode';
+import { XamlFormatter } from "./formatting/xaml-formatter";
 
 export function activate(context: vscode.ExtensionContext) {
+	let xamlFormatter: XamlFormatter;
+	xamlFormatter = new XamlFormatter();
 
 	vscode.languages.registerDocumentFormattingEditProvider('XAML', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
-			const firstLine = document.lineAt(0);
-			let retorno: vscode.TextEdit[] = [];
-
-			if (firstLine.text !== 'Formatado') {
-				retorno = [vscode.TextEdit.insert(firstLine.range.start, ' Formatado\n')];
-			}
-			return retorno;
+			return xamlFormatter.formatXaml(document);
 		}
 	});
 }
