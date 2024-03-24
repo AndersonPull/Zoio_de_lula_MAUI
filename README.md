@@ -1,6 +1,6 @@
-# zoioDeLula README
+# zoiodelula README
 
-This is the README for your extension "zoioDeLula". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "zoiodelula". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
