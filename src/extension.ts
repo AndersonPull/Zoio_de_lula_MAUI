@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
 
-	// 👍 formatter implemented using API
 	vscode.languages.registerDocumentFormattingEditProvider('XAML', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
 			const firstLine = document.lineAt(0);
