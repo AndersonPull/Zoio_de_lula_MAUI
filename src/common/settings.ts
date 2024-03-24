@@ -13,12 +13,12 @@ export const defaultSettings: ISettings = {
 };
 
 export class Settings {
-    attributesInNewlineThreshold: number;
+    attributesInNewlineThreshold?: number;
     formatOnSave?: boolean;
     positionAllAttributesOnFirstLine?: boolean;
     useSelfClosingTags?: boolean;
 
-    constructor(attributesInNewlineThreshold: number,
+    constructor(attributesInNewlineThreshold?: number,
         formatOnSave?: boolean,
         positionAllAttributesOnFirstLine?: boolean,
         useSelfClosingTags?: boolean) {
