@@ -13,14 +13,34 @@
     "Formatters"
   ],
   "activationEvents": [
-    "*"
+    "onLanguage:XAML"
   ],
   "main": "./out/extension",
   "contributes": {
     "commands": [
       {
-        "command": "zoioDeLula.helloWorld",
+        "command": "zoiodelula.helloWorld",
         "title": "Hello World"
+      }
+    ],
+    "languages": [
+      {
+        "id": "XAML",
+        "extensions": [
+          ".xaml",
+          ".config",
+          ".csproj",
+          ".xml",
+          ".xsd",
+          ".xsl",
+          ".plist"
+        ]
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+shift+c",
+        "command": "zoiodelula.helloWorld"
       }
     ],
     "configuration": [
