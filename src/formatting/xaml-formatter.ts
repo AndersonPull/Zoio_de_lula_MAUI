@@ -32,7 +32,9 @@ export class XamlFormatter {
         });
 
         docText = this.removeUnusedAttributes(docText);
+        docText = this.setUpTree(docText);
         docText = this.positionAllAttributesOnFirstLine(docText);
+
         return [vscode.TextEdit.replace(range, docText)];
     }
 
@@ -45,6 +47,10 @@ export class XamlFormatter {
     }
 
     private positionAllAttributesOnFirstLine(docText: string): string {
+        if (this.settings.positionAllAttributesOnFirstLine) {
+            return docText;
+        }
+
         let breakAfter = this.settings.attributesInNewlineThreshold ?? 1;
         let elements = docText.match(/<[^>]+>/g);
 
@@ -55,15 +61,18 @@ export class XamlFormatter {
                 let totalParams = (element.match(/=/g) || []).length;
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
+                    if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
+                        if (breakAfter === 0) {
+                            match = '\n\t' + match;
+                        }
 
-                    if (breakAfter === 0) {
-                        match = '\n\t' + match;
+                        if (paramCount % breakAfter === 0 && paramCount !== totalParams) {
+                            match += '\n   ';
+
+                            //TODO pegar os tabs do element e fazer um repeat adicionando ao match 
+                            //match += '\t'.repeat(quantidade de tabs do element);
+                        }
                     }
-
-                    if (paramCount % breakAfter === 0 && paramCount !== totalParams) {
-                        match = match + '\n\t';
-                    }
-
                     return match;
                 });
 
@@ -72,6 +81,25 @@ export class XamlFormatter {
         }
 
         return docText;
+    }
+
+    private setUpTree(docText: string): string {
+        let pad = 0;
+        let formatted = '';
+
+        docText.split(/>\s*</).forEach((node) => {
+            if (node.match(/^\/\w/)) {
+                pad--;
+            }
+
+            formatted += `${'\t'.repeat(pad)}<${node}>\n`;
+
+            if (node.match(/^<?\w[^>]*[^\/]$/)) {
+                pad++;
+            }
+        });
+
+        return formatted.trim().replace('<<', '<').replace(/>{2,}/g, '>');
     }
 
     public loadSettings() {
