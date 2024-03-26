@@ -26,7 +26,7 @@ export class XamlFormatter {
         // do some light minification to get rid of insignificant whitespace
         docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" "); // spaces between attributes
         docText = docText.replace(/"\s+(?=>)/g, "\""); // spaces between the last attribute and tag close (>)
-        docText = docText.replace(/"\s+(?=\/>)/g, "\" "); // spaces between the last attribute and tag close (/>)
+        docText = docText.replace(/"\s+(?=\/>)/g, "\""); // spaces between the last attribute and tag close (/>)
         docText = docText.replace(/(?!<!\[CDATA\[)[^ <>="]\s+[^ <>="]+=(?![^<]*?\]\]>)/g, (match: string) => { // spaces between the node name and the first attribute
             return match.replace(/\s+/g, " ");
         });
@@ -34,8 +34,17 @@ export class XamlFormatter {
         docText = this.removeUnusedAttributes(docText);
         docText = this.setUpTree(docText);
         docText = this.positionAllAttributesOnFirstLine(docText);
+        docText = this.useSelfClosingTags(docText);
 
         return [vscode.TextEdit.replace(range, docText)];
+    }
+
+    private useSelfClosingTags(docText: string): string {
+        if (this.settings.useSelfClosingTags) {
+            docText = docText.replace(/<(\w+)([^>]*)>\s*<\/\1>/g, '<$1$2/>');
+        }
+
+        return docText;
     }
 
     private removeUnusedAttributes(docText: string): string {
@@ -63,7 +72,7 @@ export class XamlFormatter {
                     paramCount++;
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
                         if (breakAfter === 0) {
-                            match = '\n\t' + match;
+                            match = '\n    ' + match;
                         }
 
                         if (paramCount % breakAfter === 0 && paramCount !== totalParams) {
@@ -92,7 +101,7 @@ export class XamlFormatter {
                 pad--;
             }
 
-            formatted += `${'\t'.repeat(pad)}<${node}>\n`;
+            formatted += `${'    '.repeat(pad)}<${node}>\n`;
 
             if (node.match(/^<?\w[^>]*[^\/]$/)) {
                 pad++;
