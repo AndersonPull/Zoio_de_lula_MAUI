@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { defaultSettings, Settings } from "../common/settings";
+import * as regex from '../common/regex';
 
 export class XamlFormatter {
     public settings: Settings = defaultSettings;
@@ -49,7 +50,7 @@ export class XamlFormatter {
 
     private removeUnusedAttributes(docText: string): string {
         if (this.settings.removeUnusedAttributes) {
-            docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
+            docText = docText.replace(regex.removeUnusedAttributes, '');
         }
 
         return docText;
@@ -72,11 +73,11 @@ export class XamlFormatter {
                     paramCount++;
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
                         if (breakAfter === 0) {
-                            match = '\n    ' + match;
+                            match = `\n${regex.tabSpace}${match}`;
                         }
 
                         if (paramCount % breakAfter === 0 && paramCount !== totalParams) {
-                            match += '\n   ';
+                            match += `\n${regex.shortTabSpace}`;
 
                             //TODO pegar os tabs do element e fazer um repeat adicionando ao match 
                             //match += '\t'.repeat(quantidade de tabs do element);
@@ -101,7 +102,7 @@ export class XamlFormatter {
                 pad--;
             }
 
-            formatted += `${'    '.repeat(pad)}<${node}>\n`;
+            formatted += `${regex.tabSpace.repeat(pad)}<${node}>\n`;
 
             if (node.match(/^<?\w[^>]*[^\/]$/)) {
                 pad++;
