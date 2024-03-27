@@ -25,7 +25,7 @@ export class XamlFormatter {
         });
 
         // do some light minification to get rid of insignificant whitespace
-        docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" "); // spaces between attributes
+        docText = docText.replace(regex.spacesBetweenAttributes, "\" "); // spaces between attributes
         docText = docText.replace(/"\s+(?=>)/g, "\""); // spaces between the last attribute and tag close (>)
         docText = docText.replace(/"\s+(?=\/>)/g, "\""); // spaces between the last attribute and tag close (/>)
         docText = docText.replace(/(?!<!\[CDATA\[)[^ <>="]\s+[^ <>="]+=(?![^<]*?\]\]>)/g, (match: string) => { // spaces between the node name and the first attribute
