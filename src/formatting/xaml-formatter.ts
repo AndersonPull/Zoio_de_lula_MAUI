@@ -23,9 +23,8 @@ export class XamlFormatter {
         docText = docText.replace(/>\s{0,}</g, (match: string) => {
             return match.replace(/[^\S\r\n]/g, "");
         });
-
         // do some light minification to get rid of insignificant whitespace
-        docText = docText.replace(regex.spacesBetweenAttributes, "\" "); // spaces between attributes
+        docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" "); // spaces between attributes
         docText = docText.replace(/"\s+(?=>)/g, "\""); // spaces between the last attribute and tag close (>)
         docText = docText.replace(/"\s+(?=\/>)/g, "\""); // spaces between the last attribute and tag close (/>)
         docText = docText.replace(/(?!<!\[CDATA\[)[^ <>="]\s+[^ <>="]+=(?![^<]*?\]\]>)/g, (match: string) => { // spaces between the node name and the first attribute
@@ -50,7 +49,8 @@ export class XamlFormatter {
 
     private removeUnusedAttributes(docText: string): string {
         if (this.settings.removeUnusedAttributes) {
-            docText = docText.replace(regex.removeUnusedAttributes, '');
+            //TODO Validar se o declaração esta sendo usada antes de remover
+            docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
         }
 
         return docText;
@@ -63,24 +63,25 @@ export class XamlFormatter {
 
         let breakAfter = this.settings.attributesInNewlineThreshold ?? 1;
         let elements = docText.match(/<[^>]+>/g);
-
+        let spacesBetweenElements = docText.match(/>\s+</g) || [];
         if (elements) {
             for (let i = 0; i < elements.length; i++) {
                 let element = elements[i];
+
                 let paramCount = 0;
                 let totalParams = (element.match(/=/g) || []).length;
+
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
-                        if (breakAfter === 0) {
-                            match = `\n${regex.tabSpace}${match}`;
+                        if (breakAfter === 0 && i > 0) {
+                            let spaces = spacesBetweenElements[i - 1].length - 2; // Subtrai 2 para desconsiderar os caracteres '>' e '<'
+                            match = '\n' + ' '.repeat(spaces) + `${regex.shortTabSpace}` + match;
                         }
 
-                        if (paramCount % breakAfter === 0 && paramCount !== totalParams) {
-                            match += `\n${regex.shortTabSpace}`;
-
-                            //TODO pegar os tabs do element e fazer um repeat adicionando ao match 
-                            //match += '\t'.repeat(quantidade de tabs do element);
+                        if (paramCount % breakAfter === 0 && paramCount !== totalParams && i > 0) {
+                            let spaces = spacesBetweenElements[i - 1].length;
+                            match += `\n` + ' '.repeat(spaces);
                         }
                     }
                     return match;
