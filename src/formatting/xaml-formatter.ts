@@ -50,7 +50,7 @@ export class XamlFormatter {
     private removeUnusedAttributes(docText: string): string {
         if (this.settings.removeUnusedAttributes) {
             //TODO Validar se o declaração esta sendo usada antes de remover
-            docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
+            //docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
         }
 
         return docText;
