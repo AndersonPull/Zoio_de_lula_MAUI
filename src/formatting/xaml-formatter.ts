@@ -49,7 +49,7 @@ export class XamlFormatter {
 
     private removeUnusedAttributes(docText: string): string {
         if (this.settings.removeUnusedAttributes) {
-            //TODO Validar se o declaração esta sendo usada antes de remover
+            //TODO Validate that the claim is being used before removing
             //docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
         }
 
@@ -75,7 +75,7 @@ export class XamlFormatter {
                     paramCount++;
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
                         if (breakAfter === 0 && i > 0) {
-                            let spaces = spacesBetweenElements[i - 1].length - 2; // Subtrai 2 para desconsiderar os caracteres '>' e '<'
+                            let spaces = spacesBetweenElements[i - 1].length - 2; // Subtract 2 to disregard the characters '>' and '<'
                             match = '\n' + ' '.repeat(spaces) + `${regex.shortTabSpace}` + match;
                         }
 
