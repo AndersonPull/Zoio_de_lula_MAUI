@@ -52,7 +52,6 @@
             "type": "number",
             "default": 1,
             "enum": [
-              0,
               1,
               2,
               3,
@@ -64,13 +63,13 @@
               9
             ]
           },
-          "zoiodelula.settings.formatOnSave": {
-            "markdownDescription": "Enable format on save.  *Default* is *Unchecked*",
+          "zoiodelula.settings.positionAllAttributesOnFirstLine": {
+            "markdownDescription": "Position all attributes on same line as element. Setting this to *Checked* will ignore *Position First Attribute On Same Line*=*Unchecked*. *Default* is *Unchecked.* \n\n **Checked** : \n\n `<Element Attribute1=\"Value1\" Attribute2=\"Value2\"` \n\n **Unchecked** :\n\n`<Element Attribute1=\"Value1\"`\n\n&emsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`Attribute2=\"Value2\"` ",
             "type": "boolean",
             "default": false
           },
-          "zoiodelula.settings.positionAllAttributesOnFirstLine": {
-            "markdownDescription": "Position all attributes on same line as element. Setting this to *Checked* will ignore *Position First Attribute On Same Line*=*Unchecked*. *Default* is *Unchecked.* \n\n **Checked** : \n\n `<Element Attribute1=\"Value1\" Attribute2=\"Value2\"` \n\n **Unchecked** :\n\n`<Element Attribute1=\"Value1\"`\n\n&emsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`Attribute2=\"Value2\"` ",
+          "zoiodelula.settings.putTheFirstAttributeOnTheFirstLine": {
+            "markdownDescription": "Put the first attribute on the first line",
             "type": "boolean",
             "default": false
           },
