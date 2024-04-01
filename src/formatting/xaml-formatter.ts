@@ -3,13 +3,10 @@ import { defaultSettings, Settings } from "../common/settings";
 import * as regex from '../common/regex';
 
 export class XamlFormatter {
-    public settings: Settings = defaultSettings;
-    constructor() {
-        this.loadSettings();
-    }
+    public settings?: Settings = defaultSettings;
 
-    public formatXaml(document: vscode.TextDocument): vscode.TextEdit[] {
-        this.loadSettings();//remove when adding commands
+    public formatXaml(document: vscode.TextDocument, settings?: Settings): vscode.TextEdit[] {
+        this.loadSettings(settings);
 
         let lastLine = document.lineAt(document.lineCount - 1);
         let range = new vscode.Range(document.positionAt(0), lastLine.range.end);
@@ -40,7 +37,7 @@ export class XamlFormatter {
     }
 
     private useSelfClosingTags(docText: string): string {
-        if (this.settings.useSelfClosingTags) {
+        if (this.settings?.useSelfClosingTags) {
             docText = docText.replace(/<(\w+)([^>]*)>\s*<\/\1>/g, '<$1$2/>');
         }
 
@@ -48,7 +45,7 @@ export class XamlFormatter {
     }
 
     private removeUnusedAttributes(docText: string): string {
-        if (this.settings.removeUnusedAttributes) {
+        if (this.settings?.removeUnusedAttributes) {
             //TODO Validate that the claim is being used before removing
             //docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
         }
@@ -57,11 +54,11 @@ export class XamlFormatter {
     }
 
     private positionAllAttributesOnFirstLine(docText: string): string {
-        if (this.settings.positionAllAttributesOnFirstLine) {
+        if (this.settings?.positionAllAttributesOnFirstLine) {
             return docText;
         }
 
-        let breakAfter = this.settings.attributesInNewlineThreshold ?? 1;
+        let breakAfter = this.settings?.attributesInNewlineThreshold ?? 1;
         let elements = docText.match(/<[^>]+>/g);
         let spacesBetweenElements = docText.match(/>\s+</g) || [];
         if (elements) {
@@ -74,7 +71,7 @@ export class XamlFormatter {
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
-                        if (this.settings.putTheFirstAttributeOnTheFirstLine === false && paramCount === 1 && i > 0) {
+                        if (this.settings?.putTheFirstAttributeOnTheFirstLine === false && paramCount === 1 && i > 0) {
                             let spaces = spacesBetweenElements[i - 1].length - 2; // Subtract 2 to disregard the characters '>' and '<'
                             match = '\n' + ' '.repeat(spaces) + `${regex.shortTabSpace}` + match;
                         }
@@ -113,7 +110,12 @@ export class XamlFormatter {
         return formatted.trim().replace('<<', '<').replace(/>{2,}/g, '>');
     }
 
-    public loadSettings() {
+    public loadSettings(settings?: Settings) {
+        if (settings !== undefined) {
+            this.settings = settings;
+            return;
+        }
+
         let zoioDeLulaConfig = vscode.workspace.getConfiguration('zoiodelula.settings');
 
         let attributesInNewlineThreshold = zoioDeLulaConfig.get<number>("attributesInNewlineThreshold");
