@@ -5,30 +5,46 @@ import { Settings } from "../common/settings";
 import * as vscode from 'vscode';
 
 suite('Basic Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+	vscode.window.showInformationMessage('Start all basic tests.');
 
 	test('Default formatting', async () => {
 		let settings = new Settings();
-		await testFormatter('basic', 'basic', settings);
+		await testFormatter('basic/basic', 'basic/basic', settings);
 	});
 
 	test('All attributes in the first line', async () => {
 		let settings = new Settings();
 		settings.positionAllAttributesOnFirstLine = true;
-		await testFormatter('basicAllAttributesInTheFirstLine', 'basic', settings);
+		await testFormatter('basic/basicAllAttributesInTheFirstLine', 'basic/basic', settings);
 	});
 
 	test('Two attributes per line', async () => {
 		let settings = new Settings();
 		settings.attributesInNewlineThreshold = 2;
 		settings.putTheFirstAttributeOnTheFirstLine = true;
-		await testFormatter('basicTwoAttributesPerLine', 'basic', settings);
+		await testFormatter('basic/basicTwoAttributesPerLine', 'basic/basic', settings);
 	});
 
 	test('Do not use self-closing tags', async () => {
 		let settings = new Settings();
 		settings.useSelfClosingTags = false;
-		await testFormatter('basicDoNotUseSelf-closingTags', 'basic', settings);
+		await testFormatter('basic/basicDoNotUseSelf-closingTags', 'basic/basic', settings);
+	});
+});
+
+suite('Unused attributes Suite', () => {
+	vscode.window.showInformationMessage('Start all testing of unused attributes.');
+
+	test('Remove unused attributes', async () => {
+		let settings = new Settings();
+		settings.removeUnusedAttributes = true;
+		await testFormatter('unusedAttributes/removeUnusedAttributes', 'unusedAttributes/removeUnusedAttributes', settings);
+	});
+
+	test('Keep unused attributes', async () => {
+		let settings = new Settings();
+		settings.removeUnusedAttributes = true;
+		await testFormatter('unusedAttributes/keepUnusedAttributes', 'unusedAttributes/keepUnusedAttributes', settings);
 	});
 });
 
