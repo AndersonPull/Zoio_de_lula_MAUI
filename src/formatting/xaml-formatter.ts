@@ -65,6 +65,8 @@ export class XamlFormatter {
         let breakAfter = this.settings?.attributesInNewlineThreshold ?? 1;
         let elements = docText.match(/<[^>]+>/g);
         let spacesBetweenElements = docText.match(/>\s+</g) || [];
+        let xmlDeclarationRegex: RegExp = /<\?xml\s+version\s*=\s*"1.0"\s+encoding\s*=\s*"utf-8"\?>/i;
+
         if (elements) {
             for (let i = 0; i < elements.length; i++) {
                 let element = elements[i];
@@ -74,17 +76,19 @@ export class XamlFormatter {
 
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
-                    //TODO validar atraves de um regex e não por uma string 
-                    if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
-                        if (this.settings?.putTheFirstAttributeOnTheFirstLine === false && paramCount === 1 && i > 0) {
-                            let spaces = spacesBetweenElements[i - 1].length - 2; // Subtract 2 to disregard the characters '>' and '<'
-                            match = formattingConstants.lineBreak + formattingConstants.space.repeat(spaces) + `${formattingConstants.shortTabSpace}` + match;
-                        }
 
-                        if (paramCount % breakAfter === 0 && paramCount !== totalParams && i > 0) {
-                            let spaces = spacesBetweenElements[i - 1].length;
-                            match += formattingConstants.lineBreak + formattingConstants.space.repeat(spaces);
-                        }
+                    if (xmlDeclarationRegex.test(element)) {
+                        return match;
+                    }
+
+                    if (this.settings?.putTheFirstAttributeOnTheFirstLine === false && paramCount === 1 && i > 0) {
+                        let spaces = spacesBetweenElements[i - 1].length - 2; // Subtract 2 to disregard the characters '>' and '<'
+                        match = formattingConstants.lineBreak + formattingConstants.space.repeat(spaces) + `${formattingConstants.shortTabSpace}` + match;
+                    }
+
+                    if (paramCount % breakAfter === 0 && paramCount !== totalParams && i > 0) {
+                        let spaces = spacesBetweenElements[i - 1].length;
+                        match += formattingConstants.lineBreak + formattingConstants.space.repeat(spaces);
                     }
                     return match;
                 });
