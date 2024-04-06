@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { defaultSettings, Settings } from "../common/settings";
-import * as regex from '../common/regex';
+import * as formattingConstants from '../common/formattingConstants';
 
 export class XamlFormatter {
     public settings?: Settings = defaultSettings;
@@ -20,6 +20,7 @@ export class XamlFormatter {
         docText = docText.replace(/>\s{0,}</g, (match: string) => {
             return match.replace(/[^\S\r\n]/g, "");
         });
+
         // do some light minification to get rid of insignificant whitespace
         docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" "); // spaces between attributes
         docText = docText.replace(/"\s+(?=>)/g, "\""); // spaces between the last attribute and tag close (>)
@@ -70,15 +71,16 @@ export class XamlFormatter {
 
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
+                    //TODO validar atraves de um regex e não por uma string 
                     if (element !== '<?xml version="1.0" encoding="utf-8"?>') {
                         if (this.settings?.putTheFirstAttributeOnTheFirstLine === false && paramCount === 1 && i > 0) {
                             let spaces = spacesBetweenElements[i - 1].length - 2; // Subtract 2 to disregard the characters '>' and '<'
-                            match = '\n' + ' '.repeat(spaces) + `${regex.shortTabSpace}` + match;
+                            match = formattingConstants.lineBreak + formattingConstants.space.repeat(spaces) + `${formattingConstants.shortTabSpace}` + match;
                         }
 
                         if (paramCount % breakAfter === 0 && paramCount !== totalParams && i > 0) {
                             let spaces = spacesBetweenElements[i - 1].length;
-                            match += `\n` + ' '.repeat(spaces);
+                            match += formattingConstants.lineBreak + formattingConstants.space.repeat(spaces);
                         }
                     }
                     return match;
@@ -100,7 +102,7 @@ export class XamlFormatter {
                 pad--;
             }
 
-            formatted += `${regex.tabSpace.repeat(pad)}<${node}>\n`;
+            formatted += `${formattingConstants.tabSpace.repeat(pad)}<${node}>\n`;
 
             if (node.match(/^<?\w[^>]*[^\/]$/)) {
                 pad++;
