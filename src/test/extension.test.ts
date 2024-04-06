@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Settings } from "../common/settings";
 import * as vscode from 'vscode';
 
-suite('Basic Suite', () => {
+suite('Basic suite', () => {
 	vscode.window.showInformationMessage('Start all basic tests.');
 
 	test('Default formatting', async () => {
@@ -32,7 +32,7 @@ suite('Basic Suite', () => {
 	});
 });
 
-suite('Unused attributes Suite', () => {
+suite('Unused attributes suite', () => {
 	vscode.window.showInformationMessage('Start all testing of unused attributes.');
 
 	test('Remove unused attributes', async () => {
