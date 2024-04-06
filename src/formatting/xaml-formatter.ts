@@ -16,6 +16,7 @@ export class XamlFormatter {
             return [];
         }
 
+        //TODO colocar em um metodo
         // remove whitespace from between tags, except for line breaks
         docText = docText.replace(/>\s{0,}</g, (match: string) => {
             return match.replace(/[^\S\r\n]/g, "");

@@ -19,8 +19,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "zoiodelula.helloWorld",
-        "title": "Hello World"
+        "command": "zoiodelula.Format",
+        "title": "Format document"
       }
     ],
     "languages": [
@@ -35,12 +35,6 @@
           ".xsl",
           ".plist"
         ]
-      }
-    ],
-    "keybindings": [
-      {
-        "key": "ctrl+shift+c",
-        "command": "zoiodelula.helloWorld"
       }
     ],
     "configuration": [
