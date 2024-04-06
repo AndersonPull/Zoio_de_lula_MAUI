@@ -16,7 +16,16 @@ export class XamlFormatter {
             return [];
         }
 
-        //TODO colocar em um metodo
+        docText = this.removeWhitespace(docText);
+        docText = this.removeUnusedAttributes(docText);
+        docText = this.setUpTree(docText);
+        docText = this.positionAllAttributesOnFirstLine(docText);
+        docText = this.useSelfClosingTags(docText);
+
+        return [vscode.TextEdit.replace(range, docText)];
+    }
+
+    private removeWhitespace(docText: string): string {
         // remove whitespace from between tags, except for line breaks
         docText = docText.replace(/>\s{0,}</g, (match: string) => {
             return match.replace(/[^\S\r\n]/g, "");
@@ -30,12 +39,7 @@ export class XamlFormatter {
             return match.replace(/\s+/g, " ");
         });
 
-        docText = this.removeUnusedAttributes(docText);
-        docText = this.setUpTree(docText);
-        docText = this.positionAllAttributesOnFirstLine(docText);
-        docText = this.useSelfClosingTags(docText);
-
-        return [vscode.TextEdit.replace(range, docText)];
+        return docText;
     }
 
     private useSelfClosingTags(docText: string): string {
