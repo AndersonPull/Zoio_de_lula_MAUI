@@ -26,17 +26,15 @@ export class XamlFormatter {
     }
 
     private removeWhitespace(docText: string): string {
-        // remove whitespace from between tags, except for line breaks
         docText = docText.replace(/>\s{0,}</g, (match: string) => {
-            return match.replace(/[^\S\r\n]/g, "");
+            return match.replace(/[^\S\r\n]/g, formattingConstants.empty);
         });
 
-        // do some light minification to get rid of insignificant whitespace
-        docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" "); // spaces between attributes
-        docText = docText.replace(/"\s+(?=>)/g, "\""); // spaces between the last attribute and tag close (>)
-        docText = docText.replace(/"\s+(?=\/>)/g, "\""); // spaces between the last attribute and tag close (/>)
-        docText = docText.replace(/(?!<!\[CDATA\[)[^ <>="]\s+[^ <>="]+=(?![^<]*?\]\]>)/g, (match: string) => { // spaces between the node name and the first attribute
-            return match.replace(/\s+/g, " ");
+        docText = docText.replace(/"\s+(?=[^\s]+=)/g, "\" ");
+        docText = docText.replace(/"\s+(?=>)/g, "\"");
+        docText = docText.replace(/"\s+(?=\/>)/g, "\"");
+        docText = docText.replace(/(?!<!\[CDATA\[)[^ <>="]\s+[^ <>="]+=(?![^<]*?\]\]>)/g, (match: string) => {
+            return match.replace(/\s+/g, formattingConstants.space);
         });
 
         return docText;
@@ -100,7 +98,7 @@ export class XamlFormatter {
 
     private setUpTree(docText: string): string {
         let pad = 0;
-        let formatted = '';
+        let formatted = formattingConstants.empty;
 
         docText.split(/>\s*</).forEach((node) => {
             if (node.match(/^\/\w/)) {
