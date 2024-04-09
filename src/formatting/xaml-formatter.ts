@@ -50,10 +50,24 @@ export class XamlFormatter {
 
     private removeUnusedAttributes(docText: string): string {
         if (this.settings?.removeUnusedAttributes) {
-            //TODO Validate that the claim is being used before removing
-            //docText = docText.replace(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g, '');
-        }
+            let elements = docText.match(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g);
+            let counts: { [index: string]: number } = {};
 
+            if (elements) {
+                elements.forEach(function (x) {
+                    counts[x] = (counts[x] || 0) + 1;
+                });
+                //VALIDAR
+                // Iterar pelos elementos e verificar se o atributo está sendo usado
+                for (const element in counts) {
+                    const attributeName = element.split('=')[0].trim(); // Extrair o nome do atributo
+                    if (attributeName.startsWith('xmlns:') && !docText.includes(`<${attributeName.substr(6)}:`)) {
+                        // Remover o atributo se não estiver sendo usado
+                        docText = docText.replace(element, '');
+                    }
+                }
+            }
+        }
         return docText;
     }
 
