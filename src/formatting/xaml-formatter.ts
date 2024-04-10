@@ -57,6 +57,7 @@ export class XamlFormatter {
                 elements.forEach(function (x) {
                     counts[x] = (counts[x] || 0) + 1;
                 });
+
                 //VALIDAR
                 // Iterar pelos elementos e verificar se o atributo está sendo usado
                 for (const element in counts) {
