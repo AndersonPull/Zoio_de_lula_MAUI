@@ -18,9 +18,9 @@ export class XamlFormatter {
 
         docText = this.removeWhitespace(docText);
         docText = this.removeUnusedAttributes(docText);
-        docText = this.setUpTree(docText);
-        docText = this.positionAllAttributesOnFirstLine(docText);
         docText = this.useSelfClosingTags(docText);
+        docText = this.tagTreeConfiguration(docText);
+        docText = this.configureAttributePosition(docText);
 
         return [vscode.TextEdit.replace(range, docText)];
     }
@@ -72,7 +72,7 @@ export class XamlFormatter {
         return docText;
     }
 
-    private positionAllAttributesOnFirstLine(docText: string): string {
+    private configureAttributePosition(docText: string): string {
         if (this.settings?.positionAllAttributesOnFirstLine) {
             return docText;
         }
@@ -115,7 +115,7 @@ export class XamlFormatter {
         return docText;
     }
 
-    private setUpTree(docText: string): string {
+    private tagTreeConfiguration(docText: string): string {
         let pad = 0;
         let formatted = formattingConstants.empty;
 
