@@ -57,15 +57,18 @@ export class XamlFormatter {
                 elements.forEach(function (x) {
                     counts[x] = (counts[x] || 0) + 1;
                 });
+            }
 
-                for (const element in counts) {
-                    const attributeName = element.split('=')[0].trim(); // Extrair o nome do atributo
-                    if (attributeName.startsWith('xmlns:') && !docText.includes(`<${attributeName.substr(6)}:`)) {
+            for (const element in counts) {
+                const attributeName = element.split('=')[0].trim();
+                if (attributeName.startsWith('xmlns:') && !docText.includes(`<${attributeName.substr(6)}:`)) {
+                    if (element.trim() !== 'xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"') {
                         docText = docText.replace(element, '');
                     }
                 }
             }
         }
+
         return docText;
     }
 
