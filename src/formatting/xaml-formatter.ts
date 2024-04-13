@@ -92,6 +92,10 @@ export class XamlFormatter {
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
 
+                    if (element.trim().startsWith("<!--") && element.trim().endsWith("-->")) {
+                        return match;
+                    }
+
                     if (xmlDeclarationRegex.test(element)) {
                         return match;
                     }

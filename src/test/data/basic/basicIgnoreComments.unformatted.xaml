@@ -5,7 +5,7 @@
     x:Class="ZoioDeLula.Basic">
     <ContentPage.Content>
         <StackLayout> 
-<!--test ignore comments-->
+<!--test ignore="comments"-->
             <Label 
                 Text="Welcome to Zoio de lula"
                 VerticalOptions="CenterAndExpand"
