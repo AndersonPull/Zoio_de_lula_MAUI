@@ -14,7 +14,11 @@ Zoio de lula is a XAML Formatter extension for Visual Studio Code
 
 ## How to run the project
 Make a git clone
+
 Open in vscode
+
 Open terminal in project folder and run npm install
+
 Run npm test
+
 Now everything is ready for you to work!
