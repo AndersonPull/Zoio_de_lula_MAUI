@@ -48,6 +48,16 @@ suite('Unused attributes suite', () => {
 	});
 });
 
+suite('BugFix suite', () => {
+	vscode.window.showInformationMessage('Start all testing of unused attributes.');
+
+	test('line break in last attribute', async () => {
+		let settings = new Settings();
+		settings.removeUnusedAttributes = true;
+		await testFormatter('bugFix/lineBreakInLastAttribute', 'bugFix/lineBreakInLastAttribute', settings);
+	});
+});
+
 async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings): Promise<void> {
 	let xamlFormatter = new XamlFormatter();
 
