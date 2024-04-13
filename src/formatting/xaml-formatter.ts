@@ -87,7 +87,7 @@ export class XamlFormatter {
                 let element = elements[i];
 
                 let paramCount = 0;
-                let totalParams = (element.match(/=/g) || []).length;
+                let totalParams = (element.match(/([^\s="]+)="([^"]*)"/g) || []).length;
 
                 let formattedElement = element.replace(/([^\s="]+)="([^"]*)"/g, (match) => {
                     paramCount++;
