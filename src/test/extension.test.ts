@@ -30,6 +30,11 @@ suite('Basic suite', () => {
 		settings.useSelfClosingTags = false;
 		await testFormatter('basic/basicDoNotUseSelf-closingTags', 'basic/basic', settings);
 	});
+
+	test('Ignore comments', async () => {
+		let settings = new Settings();
+		await testFormatter('basic/basicIgnoreComments', 'basic/basicIgnoreComments', settings);
+	});
 });
 
 suite('Unused attributes suite', () => {
