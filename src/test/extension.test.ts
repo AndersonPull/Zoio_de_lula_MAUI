@@ -20,7 +20,7 @@ suite('Basic suite', () => {
 
 	test('Two attributes per line', async () => {
 		let settings = new Settings();
-		settings.attributesInNewlineThreshold = 2;
+		settings.numberOfAttributesPerLine = 2;
 		settings.putTheFirstAttributeOnTheFirstLine = true;
 		await testFormatter('basic/basicTwoAttributesPerLine', 'basic/basic', settings);
 	});

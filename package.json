@@ -41,8 +41,8 @@
       {
         "title": "Zoio de lula",
         "properties": {
-          "zoiodelula.settings.attributesInNewlineThreshold": {
-            "markdownDescription": "Attributes count threshold to position attributes in newlines. Default is *1*. This setting only works when **Position first attribute on same line** is enabled.\n\nFor example if threshold=2, all attributes will be on same line if an element has only 2 attributes,\n\notherwise each attribute will be placed on newline.\n\nMore Info: [GitHub](https://github.com/AndersonPull/Zoio_de_lula_MAUI)",
+          "zoiodelula.settings.numberOfAttributesPerLine": {
+            "markdownDescription": "Number of attributes per line",
             "type": "number",
             "default": 1,
             "enum": [

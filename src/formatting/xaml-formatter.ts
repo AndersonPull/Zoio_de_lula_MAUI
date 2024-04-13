@@ -77,7 +77,7 @@ export class XamlFormatter {
             return docText;
         }
 
-        let breakAfter = this.settings?.attributesInNewlineThreshold ?? 1;
+        let breakAfter = this.settings?.numberOfAttributesPerLine ?? 1;
         let elements = docText.match(/<[^>]+>/g);
         let spacesBetweenElements = docText.match(/>\s+</g) || [];
         let xmlDeclarationRegex: RegExp = /<\?xml\s+version\s*=\s*"1.0"\s+encoding\s*=\s*"utf-8"\?>/i;
@@ -146,13 +146,13 @@ export class XamlFormatter {
 
         let zoioDeLulaConfig = vscode.workspace.getConfiguration('zoiodelula.settings');
 
-        let attributesInNewlineThreshold = zoioDeLulaConfig.get<number>("attributesInNewlineThreshold");
+        let numberOfAttributesPerLine = zoioDeLulaConfig.get<number>("numberOfAttributesPerLine");
         let putTheFirstAttributeOnTheFirstLine = zoioDeLulaConfig.get<boolean>('putTheFirstAttributeOnTheFirstLine');
         let positionAllAttributesOnFirstLine = zoioDeLulaConfig.get<boolean>('positionAllAttributesOnFirstLine');
         let removeUnusedAttributes = zoioDeLulaConfig.get<boolean>('removeUnusedAttributes');
         let useSelfClosingTags = zoioDeLulaConfig.get<boolean>('useSelfClosingTag');
 
-        this.settings = new Settings(attributesInNewlineThreshold,
+        this.settings = new Settings(numberOfAttributesPerLine,
             positionAllAttributesOnFirstLine,
             putTheFirstAttributeOnTheFirstLine,
             removeUnusedAttributes,

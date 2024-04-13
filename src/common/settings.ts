@@ -1,5 +1,5 @@
 export interface ISettings {
-    attributesInNewlineThreshold: number;
+    numberOfAttributesPerLine: number;
     positionAllAttributesOnFirstLine: boolean;
     putTheFirstAttributeOnTheFirstLine: boolean;
     removeUnusedAttributes: boolean;
@@ -7,7 +7,7 @@ export interface ISettings {
 }
 
 export const defaultSettings: ISettings = {
-    attributesInNewlineThreshold: 1,
+    numberOfAttributesPerLine: 1,
     positionAllAttributesOnFirstLine: false,
     putTheFirstAttributeOnTheFirstLine: false,
     removeUnusedAttributes: false,
@@ -15,18 +15,18 @@ export const defaultSettings: ISettings = {
 };
 
 export class Settings {
-    attributesInNewlineThreshold?: number;
+    numberOfAttributesPerLine?: number;
     positionAllAttributesOnFirstLine?: boolean;
     putTheFirstAttributeOnTheFirstLine?: boolean;
     removeUnusedAttributes?: boolean;
     useSelfClosingTags?: boolean;
 
-    constructor(attributesInNewlineThreshold?: number,
+    constructor(numberOfAttributesPerLine?: number,
         positionAllAttributesOnFirstLine?: boolean,
         putTheFirstAttributeOnTheFirstLine?: boolean,
         removeUnusedAttributes?: boolean,
         useSelfClosingTags?: boolean) {
-        this.attributesInNewlineThreshold = attributesInNewlineThreshold ?? defaultSettings.attributesInNewlineThreshold;
+        this.numberOfAttributesPerLine = numberOfAttributesPerLine ?? defaultSettings.numberOfAttributesPerLine;
         this.positionAllAttributesOnFirstLine = positionAllAttributesOnFirstLine ?? defaultSettings.positionAllAttributesOnFirstLine;
         this.putTheFirstAttributeOnTheFirstLine = putTheFirstAttributeOnTheFirstLine ?? defaultSettings.putTheFirstAttributeOnTheFirstLine;
         this.removeUnusedAttributes = removeUnusedAttributes ?? defaultSettings.removeUnusedAttributes;
