@@ -12,6 +12,8 @@ Zoio de lula is a XAML Formatter extension for Visual Studio Code
 | zoiodelula.settings.removeUnusedAttributes             | Remove unused "xmlns:" attributes          | false         |
 | zoiodelula.settings.useSelfClosingTag                  | If no child nodes then self closing tag /> | true          |
 
+
+![alt text](https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/zoio_settings.png)
 ## How to run the project
 Make a git clone
 
