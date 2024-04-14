@@ -3,6 +3,8 @@
 ## About 
 Zoio de lula is a XAML Formatter extension for Visual Studio Code
 
+![alt text](https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/Format.gif)
+
 ## Settings
 | Setting Key                                            | Description                                | Default Value |
 | ------------------------------------------------------ | ------------------------------------------ | ------------- |
