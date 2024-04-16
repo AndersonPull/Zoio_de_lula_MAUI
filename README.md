@@ -1,4 +1,5 @@
 # Zoio de Lula
+<img src="https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/logo.png" alt="logo" width="200" />
 
 ## About 
 Zoio de lula is a XAML Formatter extension for Visual Studio Code
