@@ -1,8 +1,8 @@
 {
   "name": "zoiodelula",
   "displayName": "Zoio de Lula",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Zoio de lula is a XAML Formatter extension for Visual Studio Code",
+  "version": "1.0.0",
   "author": "Anderson Oliveira",
   "license": "MIT",
   "icon": "images/logo.png",
@@ -27,13 +27,7 @@
       {
         "id": "XAML",
         "extensions": [
-          ".xaml",
-          ".config",
-          ".csproj",
-          ".xml",
-          ".xsd",
-          ".xsl",
-          ".plist"
+          ".xaml"
         ]
       }
     ],
