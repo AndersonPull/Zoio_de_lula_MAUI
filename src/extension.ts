@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { XamlFormatter } from "./formatting/xaml-formatter";
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate() {
 	let xamlFormatter = new XamlFormatter();
 
 	vscode.languages.registerDocumentFormattingEditProvider('XAML', {
