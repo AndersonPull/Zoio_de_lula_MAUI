@@ -1,9 +1,15 @@
 # Change Log
 
-All notable changes to the "zoiodelula" extension will be documented in this file.
+### 1.0.2
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+Fixes [Formatting by removing xmlns:example when example is used as an attribute)](https://github.com/AndersonPull/Zoio_de_lula_MAUI/issues/1)
 
-## [Unreleased]
+### 1.0.1
 
-- Initial release
+rename extension 
+
+### 1.0.0
+
+Initial release 1.0.0
+
+
