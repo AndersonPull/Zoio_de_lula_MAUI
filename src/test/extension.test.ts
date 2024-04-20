@@ -61,6 +61,12 @@ suite('BugFix suite', () => {
 		settings.removeUnusedAttributes = true;
 		await testFormatter('bugFix/lineBreakInLastAttribute', 'bugFix/lineBreakInLastAttribute', settings);
 	});
+
+	test('Issue 1', async () => {
+		let settings = new Settings();
+		settings.removeUnusedAttributes = true;
+		await testFormatter('bugFix/issue1', 'bugFix/issue1', settings);
+	});
 });
 
 async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings): Promise<void> {
