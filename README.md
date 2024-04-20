@@ -1,10 +1,10 @@
-<img src="https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/banner.png" alt="banner" width="1000" />
+<img src="./images/banner.png" alt="banner" width="1000" />
 
 # Zoio de Lula
 
 Zoio de lula is a XAML Formatter extension for Visual Studio Code
 
-<img src="https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/Format.gif" alt="gif format" width="1000" />
+<img src="./images/Format.gif" alt="gif format" width="1000" />
 
 ## Settings
 
@@ -16,7 +16,7 @@ Zoio de lula is a XAML Formatter extension for Visual Studio Code
 | zoiodelula.settings.removeUnusedAttributes             | Remove unused "xmlns:" attributes          | false         |
 | zoiodelula.settings.useSelfClosingTag                  | If no child nodes then self closing tag /> | true          |
 
-<img src="https://github.com/AndersonPull/Zoio_de_lula_MAUI/blob/main/images/settings.png" alt="settings" width="1000" />
+<img src="./images/settings.png" alt="settings" width="1000" />
 
 ## How to run the project
 
