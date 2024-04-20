@@ -52,24 +52,30 @@ export class XamlFormatter {
         if (this.settings?.removeUnusedAttributes) {
             let elements = docText.match(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g);
             let counts: { [index: string]: number } = {};
-
+    
             if (elements) {
                 elements.forEach(function (x) {
                     counts[x] = (counts[x] || 0) + 1;
                 });
             }
-
+    
             for (const element in counts) {
                 const attributeName = element.split('=')[0].trim();
-                if (attributeName.startsWith('xmlns:') && !docText.includes(`<${attributeName.substr(6)}:`)) {
+                if (attributeName.startsWith('xmlns:') && !this.isNamespaceUsed(docText, attributeName)) {
                     if (element.trim() !== 'xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"') {
                         docText = docText.replace(element, '');
                     }
                 }
             }
         }
-
+    
         return docText;
+    }
+    
+    private isNamespaceUsed(docText: string, attributeName: string): boolean {
+        const prefix = attributeName.substr(6);
+        const regex = new RegExp(`(<[^>]*\\s${prefix}:|${prefix}:)`, 'g');
+        return regex.test(docText);
     }
 
     private configureAttributePosition(docText: string): string {
