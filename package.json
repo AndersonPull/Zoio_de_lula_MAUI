@@ -41,7 +41,8 @@
       {
         "id": "XAML",
         "extensions": [
-          ".xaml"
+          ".xaml",
+          ".axaml"
         ]
       }
     ],
