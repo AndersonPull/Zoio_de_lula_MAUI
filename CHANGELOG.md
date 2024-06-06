@@ -1,5 +1,9 @@
 # Change Log
 
+### 1.0.4
+
+ - **Issue:** Added formatting for axaml files
+
 ### 1.0.3
 
  - **Fix:** images Readme
