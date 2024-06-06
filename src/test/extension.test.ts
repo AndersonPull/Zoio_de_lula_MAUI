@@ -67,13 +67,18 @@ suite('BugFix suite', () => {
 		settings.removeUnusedAttributes = true;
 		await testFormatter('bugFix/issue1', 'bugFix/issue1', settings);
 	});
+
+	test('Issue 2', async () => {
+		let settings = new Settings();
+		await testFormatter('bugFix/issue2', 'bugFix/issue2', settings, "axaml");
+	});
 });
 
-async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings): Promise<void> {
+async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings , extesion: string = "xaml"): Promise<void> {
 	let xamlFormatter = new XamlFormatter();
 
-	const expectedFormattedXaml = dataLoader(`${fileNameFormatted}.formatted.xaml`).replace(/\r/g, "");
-	const unformattedXaml = dataLoader(`${fileNameUnformatted}.unformatted.xaml`);
+	const expectedFormattedXaml = dataLoader(`${fileNameFormatted}.formatted.${extesion}`).replace(/\r/g, "");
+	const unformattedXaml = dataLoader(`${fileNameUnformatted}.unformatted.${extesion}`);
 
 	const document = await vscode.workspace.openTextDocument({ content: unformattedXaml });
 	const textEdits = xamlFormatter.formatXaml(document, settings);
