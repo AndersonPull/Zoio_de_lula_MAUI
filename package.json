@@ -27,19 +27,28 @@
     "Formatters"
   ],
   "activationEvents": [
-    "onLanguage:XAML"
+    "onLanguage:xaml"
   ],
   "main": "./out/extension",
   "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "zoiodelula.Format",
+          "when": "resourceLangId == xaml && resourceScheme == file",
+          "group": "1_modification"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "zoiodelula.Format",
-        "title": "Format document"
+        "title": "Format (Zoio)"
       }
     ],
     "languages": [
       {
-        "id": "XAML",
+        "id": "xaml",
         "extensions": [
           ".xaml",
           ".axaml"
@@ -99,14 +108,17 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.87.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.87.0",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
-    "eslint": "^8.56.0",
-    "typescript": "^5.3.3",
     "@vscode/test-cli": "^0.0.6",
-    "@vscode/test-electron": "^2.3.9"
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "punycode": "^2.3.1"
   }
 }
