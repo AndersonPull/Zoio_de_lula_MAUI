@@ -72,9 +72,14 @@ suite('BugFix suite', () => {
 		let settings = new Settings();
 		await testFormatter('bugFix/issue2', 'bugFix/issue2', settings, "axaml");
 	});
+
+	test('Issue 4', async () => {
+		let settings = new Settings();
+		await testFormatter('basic/basic', 'bugFix/issue4', settings, "xaml");
+	});
 });
 
-async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings , extesion: string = "xaml"): Promise<void> {
+async function testFormatter(fileNameFormatted: string, fileNameUnformatted: string, settings: Settings, extesion: string = "xaml"): Promise<void> {
 	let xamlFormatter = new XamlFormatter();
 
 	const expectedFormattedXaml = dataLoader(`${fileNameFormatted}.formatted.${extesion}`).replace(/\r/g, "");

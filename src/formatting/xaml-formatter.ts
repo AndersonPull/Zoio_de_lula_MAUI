@@ -52,13 +52,13 @@ export class XamlFormatter {
         if (this.settings?.removeUnusedAttributes) {
             let elements = docText.match(/(\s*xmlns:[^\s=]*="[^"]*"\s*)/g);
             let counts: { [index: string]: number } = {};
-    
+
             if (elements) {
                 elements.forEach(function (x) {
                     counts[x] = (counts[x] || 0) + 1;
                 });
             }
-    
+
             for (const element in counts) {
                 const attributeName = element.split('=')[0].trim();
                 if (attributeName.startsWith('xmlns:') && !this.isNamespaceUsed(docText, attributeName)) {
@@ -68,10 +68,10 @@ export class XamlFormatter {
                 }
             }
         }
-    
+
         return docText;
     }
-    
+
     private isNamespaceUsed(docText: string, attributeName: string): boolean {
         const prefix = attributeName.substr(6);
         const regex = new RegExp(`(<[^>]*\\s${prefix}:|${prefix}:)`, 'g');
@@ -126,6 +126,7 @@ export class XamlFormatter {
     }
 
     private tagTreeConfiguration(docText: string): string {
+        docText = docText.trim();
         let pad = 0;
         let formatted = formattingConstants.empty;
 
